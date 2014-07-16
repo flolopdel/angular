@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+    <body ng-app='miAplicacion'>
+        <!--  Aquí irán las "plantillas" -->
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="js/vendor/angular.min.js"></script>
+        <script src="js/vendor/angular-route.min.js"></script>
+        <script src="js/main.js"></script>
+        Soy una aplicación angular
+        <div ng-controller='miControlador'>
+          <p> {{ textoDinamico }} </p> 
+            Usando el tag ng-bind <span ng-bind='textoDinamico'></span> 
+        </div>
+
+        <div ng-controller='miIteracion'>
+            <ul>
+               <!--  CONCATENAR TEXTOS -->
+               <li ng-repeat='animal in animales | orderBy:"-especie"' >{{$index}}.{{ animal.especie }} pertenece a los {{ animal.clase }}</li>
+            </ul>
+            <p>Sólo mamíferos</p>
+            <ul>
+               <li ng-repeat='animal in animales  | filter:{clase:"mamíferos"} | orderBy:"especie"' >{{$index}}.{{ animal.especie }} pertenece a los {{ animal.clase }}</li>
+            </ul>
+        </div>
+        <div ng-controller='controladorClick'>
+            <p ng-click='miFuncion()'>Pulsa aquí</p>
+            <p ng-click='miFuncion2("soy un parámetro")'>Pulsa aquí 2</p>
+        </div>      
+    </body>
+</html>
