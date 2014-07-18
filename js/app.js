@@ -28,17 +28,25 @@ moduloLiga.config(function($routeProvider) {
 		templateUrl : "templates/liga/main.html",
 		controller : "playersController"
 	})
-	.when("/flori", {
-		templateUrl : "templates/flori.html",
-		controller : "controllerGrecia"
-	})
-	.when("/manuel", {
-		templateUrl : "templates/manuel.html",
-		controller : "controllerEscandinavia"
-	})
-	.when("/oli", {
-		templateUrl : "templates/oli.html",
-		controller : "controllerMesoamerica"
+	.when("/player/:id", {
+		templateUrl : "templates/liga/infoplayer.html",
+		controller : "playerController"
 	})
 	.otherwise({ reditrectTo : "/" });
 });
+moduloLiga.factory('factoryPlayer', function($http) {
+
+	var mainInfo = $http.get('http://localhost/angular-filesi/js/jsonp.json').success(function(response) {
+        return response;
+    });
+    var factory = {}; // define factory object
+
+    factory.getMainInfo = function() { // define method on factory object
+
+        return mainInfo; // returning data that was pulled in $http call
+
+    };
+
+    return factory;
+
+  });

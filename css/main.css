@@ -214,6 +214,17 @@ textarea {
     *zoom: 1;
 }
 
+div.contenidotabla{
+    width:700px;
+    margin: 100px;
+}
+input[type=submit]{
+    float:right;
+}
+div.contenidotabla table{
+    width:100%;
+}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.

@@ -14,32 +14,21 @@ moduloMitologia.controller("controllerMesoamerica", function ($scope){
 });
 
 //LIGA
-moduloLiga.controller('playersController', function($scope) {
-    $scope.playersList = [
-      {
-          name: 'Flori',
-          points: 0,
-          nationality: "Sevilla",
-          Teams: [
-              {name: "FC Bayer", activo: 1}
-          ]
-      },
-      {
-          name: 'Manuel',
-          points: 0,
-          nationality: "Córdoba",
-          Teams: [
-              {name: "Juventus", activo: 1},
-              {name: "Barcelona", activo: 0}
-          ]
-      },
-      {
-          name: 'Oli',
-          points: 0,
-          nationality: "Córdoba",
-          Teams: [
-              {name: "PSV", activo: 1}
-          ]
-      }
-    ];
+moduloLiga.controller('playersController', function($scope, factoryPlayer) {
+    factoryPlayer.getMainInfo().success(function (response) {
+        //Dig into the responde to get the relevant data
+        console.log(response);
+        $scope.playersList = response;
+    });
 });
+moduloLiga.controller('SendPoint', ['$scope', function($scope) {
+      $scope.list = [];
+      $scope.text = 'hello';
+      $scope.submit = function() {
+        if ($scope.text) {
+          alert(this.text);
+          $scope.list.push(this.text);
+          $scope.text = '';
+        }
+      };
+    }]);
