@@ -25,18 +25,14 @@ var moduloLiga = angular.module('appLiga', ['ngRoute']);
 moduloLiga.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "templates/liga/main.html",
-		controller : "playersController"
-	})
-	.when("/player/:id", {
-		templateUrl : "templates/liga/infoplayer.html",
-		controller : "playerController"
+		templateUrl : "templates/liga/main.html"
 	})
 	.otherwise({ reditrectTo : "/" });
 });
 moduloLiga.factory('factoryPlayer', function($http) {
 
 	var mainInfo = $http.get('http://localhost/angular-filesi/js/jsonp.json').success(function(response) {
+		console.log(response);
         return response;
     });
     var factory = {}; // define factory object
