@@ -21,14 +21,47 @@ moduloLiga.controller('playersController', function($scope, factoryPlayer) {
         $scope.playersList = response;
     });
 });
-moduloLiga.controller('SendPoint', ['$scope', function($scope) {
-      $scope.list = [];
-      $scope.text = 'hello';
-      $scope.submit = function() {
-        if ($scope.text) {
-          alert(this.text);
-          $scope.list.push(this.text);
-          $scope.text = '';
-        }
-      };
-    }]);
+
+moduloLiga.controller("playerAcciones", function($scope, factoryPlayer) {
+
+    factoryPlayer.getMainInfo().success(function (response) {
+        //Dig into the responde to get the relevant data
+        console.log(response);
+        $scope.playersList = response;
+    });
+
+    $scope.estadoPlayer = false;
+
+    $scope.addPlayer = function() {
+       if ( $scope.estadoPlayer === true ) {
+            $scope.estadoPlayer = false;
+       } else {
+            $scope.estadoPlayer = true;
+       }       
+    }
+
+    $scope.getShowPlayer= function() {       
+       return $scope.estadoPlayer;
+    }
+
+    $scope.submitAddPlayer = function() {
+        
+        var nuevoPlayer = {};
+        nuevoPlayer =  { name: $scope.formPlayer.inputName, 
+                       points:0, 
+                       nationality:$scope.formPlayer.inputNationality,
+                       partidosJ:0,
+                       team:$scope.formPlayer.inputTeam
+                    }; 
+        // "name":"Oli","points":"0","nationality":"Córdoba","partidosJ":"0","team":"PSG"
+        
+        /* Añadimos la nota en el jasonajo, lo cual se refleja enseguida en la vista...*/   
+        $scope.playersList.push(nuevoPlayer);
+
+        /* Cambiamos la visibilidad del modal */
+        $scope.estadoPlayer = false;        
+
+        /* y reseteamos el formulario */
+        $scope.formPlayer = {};
+    }
+});
